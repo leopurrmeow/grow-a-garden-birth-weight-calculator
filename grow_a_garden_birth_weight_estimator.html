@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,76 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Grow a Garden Birth Weight Estimator</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 40px;
-      background-color: #f3f3f3;
-      color: #333;
-      max-width: 400px;
-      margin: auto;
-      border-radius: 8px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    }
-    h1 {
-      font-size: 20px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    input, button {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-    .result {
-      margin-top: 20px;
-      font-weight: bold;
-      text-align: center;
-    }
+    body { font-family: Arial; padding: 40px; max-width: 400px; margin: auto; background: #f3f3f3; color: #333; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+    h1 { text-align: center; margin-bottom: 20px; }
+    input, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 6px; border: 1px solid #ccc; font-size: 16px; }
+    button { background: #4CAF50; color: white; border: none; cursor: pointer; }
+    button:hover { background: #45a049; }
+    .result { margin-top: 20px; font-weight: bold; text-align: center; }
   </style>
 </head>
 <body>
-
   <h1>Birth Weight Estimator</h1>
-
   <label for="currentWeight">Current Weight (kg):</label>
   <input type="number" id="currentWeight" placeholder="e.g. 3.52" step="0.01" />
-
   <label for="age">Age (1–100):</label>
   <input type="number" id="age" placeholder="e.g. 33" min="1" max="100" />
-
-  <button onclick="estimateBirthWeight()">Estimate Birth Weight</button>
-
+  <button onclick="estimate()">Estimate Birth Weight</button>
   <div class="result" id="result"></div>
-
   <script>
-    function estimateBirthWeight() {
-      const currentWeight = parseFloat(document.getElementById("currentWeight").value);
-      const age = parseInt(document.getElementById("age").value);
-
-      if (isNaN(currentWeight) || isNaN(age) || age < 1 || age > 100) {
-        document.getElementById("result").innerText = "Please enter a valid current weight and age (1-100).";
+    function estimate() {
+      const w = parseFloat(document.getElementById('currentWeight').value);
+      const age = parseInt(document.getElementById('age').value);
+      if (isNaN(w) || isNaN(age) || age < 1 || age > 100) {
+        document.getElementById('result').innerText = 'Enter valid weight and age (1‑100).';
         return;
       }
-
-      const multiplier = 1 + 9 * (age - 1) / 99;
-      const birthWeight = currentWeight / multiplier;
-      const rounded = Math.round(birthWeight * 100) / 100;
-
-      document.getElementById("result").innerText = `Estimated Birth Weight: ${rounded} kg`;
+      const mul = 1 + 9 * (age - 1) / 99;
+      const birth = w / mul;
+      document.getElementById('result').innerText = 'Estimated Birth Weight: ' + (Math.round(birth * 100) / 100) + ' kg';
     }
   </script>
-
 </body>
 </html>
